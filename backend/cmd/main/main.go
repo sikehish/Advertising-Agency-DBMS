@@ -1,9 +1,11 @@
 package main
 
 import (
-	"fmt"
+	"github.com/sikehish/Advertising-Agency-DBMS/configs"
+	"github.com/sikehish/Advertising-Agency-DBMS/internal/routes"
 )
 
-func main(){
-	fmt.Println("Hask.inc")
+func main() {
+	configs.Initialize() // Initialization of config
+	routes.SetupRoutes() //  API routes
 }
