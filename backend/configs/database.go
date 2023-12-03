@@ -26,6 +26,7 @@ func Initialize() {
 
 	db, err := gorm.Open(mysql.Open(dbUser+":"+dbPassword+"@tcp("+dbHost+":"+dbPort+")/"+dbName+"?charset=utf8&parseTime=True&loc=Local"),&gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
+		PrepareStmt: true,
 	})
 	if err != nil {
 		log.Fatal("Database connection failed:", err)
