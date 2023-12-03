@@ -9,7 +9,7 @@ import (
 
 func GetAllClients(c *fiber.Ctx) error {
 	var clients []models.Client
-	config.DB.Find(&clients)
+	configs.DB.Find(&clients)
 	return c.JSON(clients)
 }
 
