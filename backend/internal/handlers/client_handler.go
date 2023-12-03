@@ -24,5 +24,3 @@ func GetClientByID(c *fiber.Ctx) error {
 	}
 	return c.JSON(client)
 }
-
-// Implement other CRUD handlers for clients, campaigns, advertisements, etc.
