@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/sikehish/Advertising-Agency-DBMS/configs/internal/handlers"
+	"github.com/sikehish/Advertising-Agency-DBMS/internal/handlers"
 )
 
 func SetupRoutes() {
