@@ -16,7 +16,8 @@ func GetAllClients(c *fiber.Ctx) error {
 func GetClientByID(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var client models.Client
-	if err := configs.DB.First(&client, id).Error; err != nil {
+	err := configs.DB.First(&client, id).Error
+	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"message": "Client not found"})
 		}
