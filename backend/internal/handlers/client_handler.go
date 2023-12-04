@@ -37,17 +37,45 @@ func GetClientByID(c *fiber.Ctx) error {
 
 
 func AddClient(c *fiber.Ctx) error {
-    client := new(models.Client) //returns a pointer
+    client := new(models.Client)
 
+    // Parse the request body into the client struct
     if err := c.BodyParser(client); err != nil {
-        return c.Status(503).SendString(err.Error())
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "error": "Invalid request payload",
+            "details": fiber.Map{
+                "message": err.Error(),
+            },
+        })
     }
 
-    configs.DB.Create(&client)
+    // Check if a record with the same ClientID already exists
+    if err := configs.DB.First(&client, client.ClientID).Error; err == nil {
+
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "error": "Client creation failed",
+            "details": fiber.Map{
+                "message": "Client with the same ID already exists",
+            },
+        })
+    } 
+
+    // Create a new client in the database
+    if err := configs.DB.Create(client).Error; err != nil {
+        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+            "error": "Internal server error",
+            "details": fiber.Map{
+                "message": err.Error(),
+            },
+        })
+    }
+
     return c.Status(fiber.StatusCreated).JSON(client)
 }
 
-func 	DeleteClient(c *fiber.Ctx) error {
+
+
+func DeleteClient(c *fiber.Ctx) error {
 
 	clientID := c.Params("id")
 

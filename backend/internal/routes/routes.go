@@ -11,7 +11,7 @@ func SetupRoutes() {
 	// Clients
 	app.Get("/api/v1/clients", handlers.GetAllClients)
 	app.Get("/api/v1/clients/:id", handlers.GetClientByID)
-	app.Post("/api/v1/clients/", handlers.AddClient)
+	app.Post("/api/v1/clients", handlers.AddClient)
 	app.Delete("/api/v1/clients/:id", handlers.DeleteClient)
 
 	app.Listen(":3000") // You can change the port as needed
