@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
+	"github.com/sikehish/Advertising-Agency-DBMS/internal/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -33,6 +34,8 @@ func Initialize() {
 	}
 
 	DB = db
+
+	DB.AutoMigrate(&models.Client{})
 }
 
 func GetDB() *gorm.DB {

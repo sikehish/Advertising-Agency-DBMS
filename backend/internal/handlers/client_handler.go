@@ -10,11 +10,12 @@ import (
 func GetAllClients(c *fiber.Ctx) error {
 	var clients []models.Client
 	configs.DB.Find(&clients)
-	return c.JSON(clients)
+	return c.Status(200).JSON(clients)
 }
 
 func GetClientByID(c *fiber.Ctx) error {
 	id := c.Params("id")
+
 	var client models.Client
 	err := configs.DB.First(&client, id).Error
 	if err != nil {
@@ -23,5 +24,14 @@ func GetClientByID(c *fiber.Ctx) error {
 		}
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"message": "Internal Server Error"})
 	}
-	return c.JSON(client)
+
+
+	//OR
+	// client = config.Database.Find(&dog, id)
+
+    // if client.RowsAffected == 0 {
+    //     return c.SendStatus(404)
+    // }
+
+	return c.Status(200).JSON(client)
 }
