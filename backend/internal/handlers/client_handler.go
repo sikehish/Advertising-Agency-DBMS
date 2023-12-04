@@ -25,7 +25,6 @@ func GetClientByID(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"message": "Internal Server Error"})
 	}
 
-
 	//OR
 	// client = config.Database.Find(&dog, id)
 
