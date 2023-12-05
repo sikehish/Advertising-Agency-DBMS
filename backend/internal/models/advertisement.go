@@ -16,7 +16,7 @@ type AdvertisementPlacement struct {
 	AdvertisementID  int     `json:"advertisementID"`
 	PlacementDetails string  `json:"placementDetails"`
 	Cost             float64 `json:"cost"`
-	Duration         int     `json:"duration"`
+	DurationDays         int     `json:"durationDays"`
 	// CreatedAt         time.Time  `json:"createdAt"`
 	// UpdatedAt         time.Time  `json:"updatedAt"`
 	// DeletedAt         gorm.DeletedAt  `gorm:"index" json:"-"`
