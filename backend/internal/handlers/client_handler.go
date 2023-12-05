@@ -89,5 +89,5 @@ func DeleteClient(c *fiber.Ctx) error {
 	configs.DB.Delete(&existingClient)
 
 	// Return a success message
-	return c.Status(fiber.StatusOK).JSON(fiber.Map{"message": "Client deleted successfully"})
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"message": "Client deleted successfully", "deletedClient": existingClient})
 }
