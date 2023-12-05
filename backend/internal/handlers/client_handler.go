@@ -50,7 +50,7 @@ func AddClient(c *fiber.Ctx) error {
     }
 
     // Check if a record with the same ClientID already exists
-    if err := configs.DB.First(&client, client.ClientID).Error; err == nil {
+    if err := configs.DB.First(client, client.ClientID).Error; err == nil {
 
         return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
             "error": "Client creation failed",
@@ -59,6 +59,7 @@ func AddClient(c *fiber.Ctx) error {
             },
         })
     } 
+    // configs.DB.First(client, client.ClientID) queries the database to check if a record with the same ClientID already exists. If it finds a matching record, it loads the data into the same client struct. If no record is found, it returns an error, and the existing client struct remains unchanged.
 
     // Create a new client in the database
     if err := configs.DB.Create(client).Error; err != nil {
@@ -73,6 +74,26 @@ func AddClient(c *fiber.Ctx) error {
     return c.Status(fiber.StatusCreated).JSON(client)
 }
 
+func UpdateClient(c *fiber.Ctx) error {
+    id := c.Params("id")
+
+    client := new(models.Client)
+    if err := c.BodyParser(client); err != nil {
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
+    }
+
+    existingClient := new(models.Client)
+    if err := configs.DB.First(existingClient, id).Error; err != nil {
+        return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "Client not found"})
+    }
+
+
+    if err := configs.DB.Model(existingClient).Updates(client).Error; err != nil {
+        return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to update client"})
+    }
+
+    return c.Status(fiber.StatusOK).JSON(fiber.Map{"status": "success", "data": fiber.Map{"updatedClient": existingClient}})
+}
 
 
 func DeleteClient(c *fiber.Ctx) error {
