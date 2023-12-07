@@ -9,8 +9,8 @@ import (
 func GetInvoicePaymentStats(c *fiber.Ctx) error {
 	var invoiceStats [] struct{
 			Amount         float64 `json:"amount"`
-			InvoicesCount  int     `json:"invoices_count"`
-			PaymentStatus  string  `json:"payment_status"`
+			InvoicesCount  int     `json:"invoicesCount"`
+			PaymentStatus  string  `json:"paymentStatus"`
 	}
 
 	
