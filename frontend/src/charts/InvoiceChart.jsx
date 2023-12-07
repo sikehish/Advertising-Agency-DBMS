@@ -1,39 +1,30 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  CartesianGrid,
+} from 'recharts';
 
 const InvoiceChart = ({ data }) => {
-  const labels = data.map(item => item.payment_status);
-  const amounts = data.map(item => item.amount);
+  return (
+    <ResponsiveContainer width="50%" height={400}>
+      <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="paymentStatus" label={{ value: 'Payment Status', position: 'insideBottom', offset: -5 }} />
+        <YAxis dataKey="amount" label={{ value: 'Amount', angle: -90, position: 'insideLeft', offset: -5 }} />
+        <Tooltip />
 
-  // Chart data
-  const chartData = {
-    labels: labels,
-    datasets: [
-      {
-        label: 'Amount',
-        backgroundColor: 'rgba(75,192,192,0.4)',
-        borderColor: 'rgba(75,192,192,1)',
-        borderWidth: 1,
-        hoverBackgroundColor: 'rgba(75,192,192,0.6)',
-        hoverBorderColor: 'rgba(75,192,192,1)',
-        data: amounts,
-      },
-    ],
-  };
+        {/* Bar for 'Paid' */}
+        <Bar dataKey="amount" fill="green" />
 
-  // Chart options
-  const chartOptions = {
-    scales: {
-      x: {
-        beginAtZero: true,
-      },
-      y: {
-        beginAtZero: true,
-      },
-    },
-  };
-
-  return <Bar data={chartData} options={chartOptions} />;
+      </BarChart>
+    </ResponsiveContainer>
+  );
 };
 
 export default InvoiceChart;
