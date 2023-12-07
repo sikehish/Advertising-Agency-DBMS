@@ -15,5 +15,9 @@ func SetupRoutes() {
 	app.Patch("/api/v1/clients/:id", handlers.UpdateClient)
 	app.Delete("/api/v1/clients/:id", handlers.DeleteClient)
 
+
+	//Analytics
+	app.Get("/api/v1/analytics/invoices", handlers.GetInvoicePaymentStats)
+
 	app.Listen(":3000") // You can change the port as needed
 }

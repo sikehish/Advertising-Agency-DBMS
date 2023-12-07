@@ -1,12 +1,7 @@
-Certainly! Here is the models/invoice.go file with camelCase JSON tags for your invoices table:
-
-go
-
 package models
 
 import (
-    "gorm.io/gorm"
-    "time"
+	"time"
 )
 
 type Invoice struct {
