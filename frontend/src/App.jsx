@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import InvoiceAnalytics from "./pages/InvoiceAnalytics"
-import InvoiceQuarterly from './pages/InvoiceQuarterly';
-import AdvertisementDuration from "./pages/AdvertisementDuration"
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Analytics from './pages/Analytics';
+import Contact from './pages/Contact';
+
 
 const App = () => {
- return(
-  <div>
-  <InvoiceAnalytics />
-  <InvoiceQuarterly />
-  <AdvertisementDuration />
-</div>
- )
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/analytics" element={<Analytics />} />
+      </Routes>
+    </Router>
+  );
 };
 
 export default App;
