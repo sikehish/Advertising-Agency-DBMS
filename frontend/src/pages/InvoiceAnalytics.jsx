@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import InvoiceChart from '../charts/InvoiceChart'
+import InvoiceChart from '../components/charts/InvoiceChart'
 import { InvoiceTable } from '../components/tables/InvoiceTable';
 
 const InvoiceAnalytics = () => {
