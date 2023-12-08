@@ -13,7 +13,6 @@ func GetInvoicePaymentStats(c *fiber.Ctx) error {
 			PaymentStatus  string  `json:"paymentStatus"`
 	}
 
-	
 
 	err := configs.DB.Table("invoices").
 		Select("SUM(total_amount) AS amount, COUNT(payment_status) AS invoices_count, payment_status").
@@ -29,15 +28,13 @@ func GetInvoicePaymentStats(c *fiber.Ctx) error {
 
 // ---------------------------------------------------------------
 
-type QuarterlyInvoiceOverview struct {
-	Quarter       int     `json:"quarter"`
-	NumInvoices   int     `json:"numInvoices"`
-	TotalAmount   float64 `json:"totalAmount"`
-	AverageAmount float64 `json:"averageAmount"`
-}
-
 func GetQuarterlyInvoiceOverview(c *fiber.Ctx) error {
-	var quarterlyOverviews []QuarterlyInvoiceOverview
+	var quarterlyOverviews []struct {
+		Quarter       int     `json:"quarter"`
+		NumInvoices   int     `json:"numInvoices"`
+		TotalAmount   float64 `json:"totalAmount"`
+		AverageAmount float64 `json:"averageAmount"`
+	}
 	
 	// Execute the SQL query using GORM
 	err := configs.DB.Table("invoices").
@@ -57,14 +54,13 @@ func GetQuarterlyInvoiceOverview(c *fiber.Ctx) error {
 
 // ---------------------------------------------------------------
 
-type DurationStats struct {
-	DurationCategory string `json:"durationCategory"`
-	NumAds           int    `json:"numAds"`
-	TotalCost        float64 `json:"totalCost"`
-}
 
 func GetAdvertisementDurationStats(c *fiber.Ctx) error {
-	var durationStats []DurationStats
+	var durationStats []struct {
+		DurationCategory string `json:"durationCategory"`
+		NumAds           int    `json:"numAds"`
+		TotalCost        float64 `json:"totalCost"`
+	}
 
 	// Execute the SQL query using GORM
 	err := configs.DB.Raw(`
@@ -93,10 +89,10 @@ func GetAdvertisementDurationStats(c *fiber.Ctx) error {
 // ---------------------------------------------------------------
 
 // TotalSalaryExpenseHandler retrieves the total salary expense for each department
-func TotalSalaryExpenseHandler(c *fiber.Ctx) error {
+func GetTotalSalaryExpenseHandler(c *fiber.Ctx) error {
 	var totalSalaryExpenses []struct {
 		Department          string  `json:"department"`
-		TotalSalaryExpense  float64 `json:"total_salary_expense"`
+		TotalSalaryExpense  float64 `json:"totalSalaryExpense"`
 	}
 
 	err := configs.DB.Table("employees").
@@ -114,10 +110,10 @@ func TotalSalaryExpenseHandler(c *fiber.Ctx) error {
 // ---------------------------------------------------------------
 
 // NumEmployeesHandler retrieves the total number of employees in each department
-func NumEmployeesHandler(c *fiber.Ctx) error {
+func GetNumEmployeesHandler(c *fiber.Ctx) error {
 	var numEmployees []struct {
 		Department string `json:"department"`
-		NumEmployees int `json:"num_employees"`
+		NumEmployees int `json:"numEmployees"`
 	}
 
 	err := configs.DB.Table("employees").
@@ -134,10 +130,10 @@ func NumEmployeesHandler(c *fiber.Ctx) error {
 
 // ---------------------------------------------------------------
 
-func AvgSalaryHandler(c *fiber.Ctx) error {
+func GetAvgSalaryHandler(c *fiber.Ctx) error {
 	var avgSalaries []struct {
 		Department string  `json:"department"`
-		AvgSalary  float64 `json:"avg_salary"`
+		AvgSalary  float64 `json:"avgSalary"`
 	}
 
 	err := configs.DB.Table("employees").

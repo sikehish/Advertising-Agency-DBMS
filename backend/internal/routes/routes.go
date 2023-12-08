@@ -21,6 +21,9 @@ func SetupRoutes() {
 	app.Get("/api/v1/analytics/invoice-quarterly", handlers.GetQuarterlyInvoiceOverview)
 	app.Get("/api/v1/analytics/invoice-quarterly", handlers.GetQuarterlyInvoiceOverview)
 	app.Get("/api/v1/analytics/ads-duration", handlers.GetAdvertisementDurationStats)
+	app.Get("/api/v1/analytics/total-salary", handlers.GetTotalSalaryExpenseHandler)
+	app.Get("/api/v1/analytics/num-employees", handlers.GetNumEmployeesHandler)
+	app.Get("/api/v1/analytics/avg-salary", handlers.GetAvgSalaryHandler)
 
 	app.Listen(":3000") // You can change the port as needed
 }
