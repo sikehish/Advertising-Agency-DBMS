@@ -6,7 +6,7 @@ const InvoiceAnalytics = () => {
   const [invoiceData, setInvoiceData] = useState([]);
 
   useEffect(() => {
-    fetch('api/v1/analytics/invoices')
+    fetch('api/v1/analytics/invoice-payments')
       .then(response => response.json())
       .then(data => setInvoiceData(data))
       .catch(error => console.error('Error fetching data:', error));
