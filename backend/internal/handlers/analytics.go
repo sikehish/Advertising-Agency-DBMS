@@ -91,3 +91,63 @@ func GetAdvertisementDurationStats(c *fiber.Ctx) error {
 }
 
 // ---------------------------------------------------------------
+
+// TotalSalaryExpenseHandler retrieves the total salary expense for each department
+func TotalSalaryExpenseHandler(c *fiber.Ctx) error {
+	var totalSalaryExpenses []struct {
+		Department          string  `json:"department"`
+		TotalSalaryExpense  float64 `json:"total_salary_expense"`
+	}
+
+	err := configs.DB.Table("employees").
+		Select("department, SUM(salary) AS total_salary_expense").
+		Group("department").
+		Scan(&totalSalaryExpenses).Error
+
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	return c.JSON(totalSalaryExpenses)
+}
+
+// ---------------------------------------------------------------
+
+// NumEmployeesHandler retrieves the total number of employees in each department
+func NumEmployeesHandler(c *fiber.Ctx) error {
+	var numEmployees []struct {
+		Department string `json:"department"`
+		NumEmployees int `json:"num_employees"`
+	}
+
+	err := configs.DB.Table("employees").
+		Select("department, COUNT(*) AS num_employees").
+		Group("department").
+		Scan(&numEmployees).Error
+
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	return c.JSON(numEmployees)
+}
+
+// ---------------------------------------------------------------
+
+func AvgSalaryHandler(c *fiber.Ctx) error {
+	var avgSalaries []struct {
+		Department string  `json:"department"`
+		AvgSalary  float64 `json:"avg_salary"`
+	}
+
+	err := configs.DB.Table("employees").
+		Select("department, AVG(salary) AS avg_salary").
+		Group("department").
+		Scan(&avgSalaries).Error
+
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+
+	return c.JSON(avgSalaries)
+}
