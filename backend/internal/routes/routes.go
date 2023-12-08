@@ -17,7 +17,8 @@ func SetupRoutes() {
 
 
 	//Analytics
-	app.Get("/api/v1/analytics/invoices", handlers.GetInvoicePaymentStats)
+	app.Get("/api/v1/analytics/invoice-payments", handlers.GetInvoicePaymentStats)
+	app.Get("/api/v1/analytics/invoice-quarterly", handlers.GetQuarterlyInvoiceOverview)
 
 	app.Listen(":3000") // You can change the port as needed
 }
