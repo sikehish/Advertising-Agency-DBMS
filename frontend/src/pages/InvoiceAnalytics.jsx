@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import InvoiceChart from '../components/charts/InvoiceChart'
-import { InvoiceTable } from '../components/tables/InvoiceTable';
+import { DataTable } from '../components/tables/DataTable';
 
 const InvoiceAnalytics = () => {
   const [invoiceData, setInvoiceData] = useState([]);
@@ -17,7 +17,7 @@ const InvoiceAnalytics = () => {
       <h1>Invoice Data Visualization</h1>
     <div className='flex m-10 justify-center items-center'>
       {invoiceData.length > 0 && <InvoiceChart data={invoiceData} />}
-      {invoiceData.length > 0 && <InvoiceTable invoices={invoiceData} />}
+      {invoiceData.length > 0 && <DataTable data={invoiceData} />}
     </div>
   </>
   );
