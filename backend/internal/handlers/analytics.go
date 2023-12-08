@@ -58,9 +58,9 @@ func GetQuarterlyInvoiceOverview(c *fiber.Ctx) error {
 // ---------------------------------------------------------------
 
 type DurationStats struct {
-	DurationCategory string `gorm:"column:duration_category"`
-	NumAds           int    `gorm:"column:num_ads"`
-	TotalCost        float64
+	DurationCategory string `json:"durationCategory"`
+	NumAds           int    `json:"numAds"`
+	TotalCost        float64 `json:"totalCost"`
 }
 
 func GetAdvertisementDurationStats(c *fiber.Ctx) error {
