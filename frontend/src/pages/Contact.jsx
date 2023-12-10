@@ -37,7 +37,7 @@ export default function Contact() {
       return;
     }
 
-    const res= await fetch('/api/v1/contact',{
+    const res= await fetch('/api/v1/add-contact',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
