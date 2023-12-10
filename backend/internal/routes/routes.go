@@ -27,7 +27,7 @@ func SetupRoutes() {
 
 	//Contact us
 	app.Post("/api/v1/add-contact", handlers.AddContactInfo)
-	app.Post("/api/v1/get-contacts", handlers.GetAllContacts)
+	app.Get("/api/v1/get-contacts", handlers.GetAllContacts)
 
 	app.Listen(":3000") // You can change the port as needed
 }
