@@ -9,9 +9,9 @@
 
 **Frontend (React):**
 
-* **Tailwind CSS & Chakra UI **: Powerful libraries for building responsive and stunning user interfaces
-* **Recharts **: Data visualization library for creating insightful and captivating charts and graphs
-* **MySQL **:  The reliable relational database for storing all your agency's data
+* **Tailwind CSS**: Powerful libraries for building responsive and stunning user interfaces
+* **Recharts**: Data visualization library for creating insightful and captivating charts and graphs
+* **MySQL**:  The reliable relational database for storing all your agency's data
 
 ### Project Highlights:
 
