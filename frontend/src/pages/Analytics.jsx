@@ -8,6 +8,7 @@ import NumEmployees from '../components/analytics/NumEmployees'
 function Analytics() {
   return (
     <div className='pt-20'>
+      <h1 className="text-4xl font-bold mb-8 mt-10 underline text-center text-gray-800">Business Analytics Dashboard</h1>
     <InvoiceAnalytics />
     <InvoiceQuarterly />
     <AdvertisementDuration />
