@@ -56,3 +56,13 @@ func AddContactInfo(c *fiber.Ctx) error {
 		"message": "Submission successful!",
 	})
 }
+
+func GetAllContacts(c *fiber.Ctx) error {
+	var contacts []models.ContactUs
+	configs.DB.Find(&contacts)
+	response := map[string]interface{}{
+		"length":  len(contacts),
+		"results": contacts,
+	}
+	return c.JSON(response)
+}
