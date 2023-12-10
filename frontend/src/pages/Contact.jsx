@@ -52,7 +52,7 @@ export default function Contact() {
       toast.success('Submission successful!');
       setTimeout(()=>{
         navigate('/')
-      },1000)
+      },2000)
     }
   };
 
@@ -106,7 +106,7 @@ export default function Contact() {
           />
         </div>
         <div className="flex items-center space-x-2">
-          <Checkbox className="text-gray-600 dark:text-gray-400" id="agreement" required onChange={()=>setAgreement(prev=>!prev)} />
+          <Checkbox className="text-gray-600 dark:text-gray-400" id="agreement" required onClick={()=>setAgreement(prev=>!prev)} />
           <Label className="text-sm font-normal text-gray-600 dark:text-gray-400" htmlFor="agreement">
             I agree to the&ensp;
             <button className="underline underline-offset-2 text-gray-600 dark:text-gray-400">
