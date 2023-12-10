@@ -46,8 +46,8 @@ export default function Contact() {
     })
     const data = await res.json();
 
-    if (data.status === 'fail') {
-      toast.error(data.message);
+    if (data.status=="fail") {
+      toast.error(data.error);
     } else {
       toast.success('Submission successful!');
       setTimeout(()=>{
