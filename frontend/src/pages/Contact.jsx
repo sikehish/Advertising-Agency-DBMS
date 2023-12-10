@@ -10,11 +10,13 @@ import { Button } from "@/components/ui/button"
 export default function Contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('I would like to receive more information');
   const [agreement, setAgreement] = useState(false);
   const navigate=useNavigate()
 
   const handleSubmit = async () => {
+
+    console.log(name, email, message, agreement)
     if (!name || !/^[a-zA-Z\s]+$/.test(name)) {
       toast.error('Please enter a valid name with only alphabets.');
       return;
@@ -72,6 +74,7 @@ export default function Contact() {
             id="name"
             placeholder="Enter your name"
             required
+            onChange={e=>setName(e.target.value)}
           />
         </div>
         <div className="flex space-x-2 space-y-2 items-end">
@@ -84,6 +87,7 @@ export default function Contact() {
               id="email"
               placeholder="Enter your email"
               required
+              onChange={e=>setEmail(e.target.value)}
             />
           </div>
         </div>
@@ -93,15 +97,16 @@ export default function Contact() {
           </Label>
           <textarea
             className="border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 w-full p-2"
-            defaultValue="I would like to receive more information"
+            defaultValue={message}
             id="message"
             placeholder="Type your message"
             required
             rows="4"
+            onChange={e=>setMessage(e.target.value)}
           />
         </div>
         <div className="flex items-center space-x-2">
-          <Checkbox className="text-gray-600 dark:text-gray-400" id="agreement" required />
+          <Checkbox className="text-gray-600 dark:text-gray-400" id="agreement" required onChange={()=>setAgreement(prev=>!prev)} />
           <Label className="text-sm font-normal text-gray-600 dark:text-gray-400" htmlFor="agreement">
             I agree to the&ensp;
             <button className="underline underline-offset-2 text-gray-600 dark:text-gray-400">
