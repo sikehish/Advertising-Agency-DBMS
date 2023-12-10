@@ -25,5 +25,8 @@ func SetupRoutes() {
 	app.Get("/api/v1/analytics/num-employees", handlers.GetNumEmployeesHandler)
 	app.Get("/api/v1/analytics/avg-salary", handlers.GetAvgSalaryHandler)
 
+	//Contact us
+	app.Post("/api/v1/contact", handlers.AddContactInfo)
+
 	app.Listen(":3000") // You can change the port as needed
 }
