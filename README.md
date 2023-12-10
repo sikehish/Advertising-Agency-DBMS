@@ -9,7 +9,7 @@
 
 **Frontend (React):**
 
-* **Tailwind CSS**: Powerful libraries for building responsive and stunning user interfaces
+* **Tailwind CSS && Shadcn UI**: Powerful libraries for building responsive and stunning user interfaces
 * **Recharts**: Data visualization library for creating insightful and captivating charts and graphs
 * **MySQL**:  The reliable relational database for storing all your agency's data
 
