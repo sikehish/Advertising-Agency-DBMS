@@ -1,14 +1,59 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/0EyGBV5aW7U
- */
+import { useState } from 'react';
+import {useNavigate} from "react-router-dom"
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
-import { SelectValue, SelectTrigger, SelectItem, SelectGroup, SelectContent, Select } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
 
 export default function Contact() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [agreement, setAgreement] = useState(false);
+  const navigate=useNavigate()
+
+  const handleSubmit = async () => {
+    if (!name || !/^[a-zA-Z\s]+$/.test(name)) {
+      toast.error('Please enter a valid name with only alphabets.');
+      return;
+    }
+
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+      toast.error('Please enter a valid email.');
+      return;
+    }
+
+    if (!message) {
+      toast.error('Please enter a message.');
+      return;
+    }
+
+    if (!agreement) {
+      toast.error('Please agree to the Terms & Conditions.');
+      return;
+    }
+
+    const res= await fetch('/api/v1/contact',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, message }),
+    })
+    const data = await res.json();
+
+    if (data.status === 'fail') {
+      toast.error(data.message);
+    } else {
+      toast.success('Submission successful!');
+      setTimeout(()=>{
+        navigate('/')
+      },1000)
+    }
+  };
+
   return (
     <div key="1" className="mt-12 p-24 rounded-md space-y-8">
       <div className="space-y-2">
@@ -64,9 +109,11 @@ export default function Contact() {
             </button>
           </Label>
         </div>
-        <Button className="w-full bg-gray-300 hover:bg-gray-700 text-black hover:text-white" type="submit">
+        <Button className="w-full bg-gray-300 hover:bg-gray-700 text-black hover:text-white" type="submit"
+        onClick={handleSubmit}>
           Submit
         </Button>
+        <ToastContainer />
       </div>
     </div>
   )
